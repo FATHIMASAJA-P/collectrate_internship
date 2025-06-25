@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f1c40f;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 25px 0 10px 0; /* Reduced bottom padding */
+            border-bottom: none; /* Removed border line */
+        }
+        
+        /* Navigation */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            transition: color 0.3s;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: #2b6cb0;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: white;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            padding: 20px 0 40px 0; /* Adjusted padding to move content up */
+            position: relative;
+            margin-top: -20px; /* Pulls content up further */
+        }
+        
+        .hero-content {
+            flex: 1;
+            padding-right: 40px;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-top: -10px; /* Pulls title up slightly */
+        }
+        
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 30px;
+            max-width: 500px;
+            font-weight: 500;
+        }
+        
+        .hero-image {
+             flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            transform: perspective(800px) rotateY(-10deg) scale(1.1); /* Recline and enlarge */
+            transform-origin: center;
+            transition: transform 0.5s ease;
+            margin-right: -50px; /* Compensate for larger size */
+        }
+        
+        .hero-image img {
+            
+            max-width: 110%; /* Larger image */
+            height: auto;
+            max-height: 550px; /* Increased height */
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.2)); /* Enhanced shadow */
+        }
+        
+        @keyframes float {
+              0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Login Form */
+        .login-container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 400px;
+            margin-top: 30px;
+            backdrop-filter: blur(5px);
+            color: #333;
+        }
+        
+        .login-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: rgba(255,255,255,0.8);
+            color: #333;
+        }
+        
+        .form-group input::placeholder {
+            color: rgba(0,0,0,0.5);
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #f1c40f;
+            box-shadow: 0 0 0 3px rgba(241, 196, 15, 0.3);
+        }
+        
+        .login-btn, .signup-btn {
+            background-color: #f1c40f;
+            color: #333;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .login-btn:hover, .signup-btn:hover {
+            background-color: #e6b800;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(241, 196, 15, 0.4);
+        }
+        
+        .signup-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .signup-text a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        /* Signup Form */
+        .signup-container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 400px;
+            margin-top: 30px;
+            backdrop-filter: blur(5px);
+            color: #333;
+            display: none; /* Hidden by default */
+        }
+        
+        .signup-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .login-link {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .login-link a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 0;
+            }
+            
+            .hero-content {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .hero-title, .hero-subtitle {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .login-container, .signup-container {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+                margin-top: 0;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            nav ul li {
+                margin-left: 20px;
+            }
+            
+            nav ul li a {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            header {
+                justify-content: center;
+                padding: 15px 0 5px 0;
+            }
+            
+            .hero-section {
+                margin-top: -10px;
+                padding: 20px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">My Hero Scoreboard</h1>
+                <p class="hero-subtitle">Become a hero! Earn points for good habits!</p>
+                
+                <!-- Login Form -->
+                <div class="login-container" id="loginForm">
+                    <h2 class="login-title">Welcome Heroes!</h2>
+                    <form method="post" action="">
+                         {% csrf_token %}
+                         <input type="hidden" name="login_submit" value="1">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" placeholder="Enter your username">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="login-btn">Login</button>
+                    </form>
+                    <p class="signup-text">New hero? <a id="showSignup">Sign up here</a></p>
+                </div>
+                
+                <!-- Signup Form (Hidden by default) -->
+                <div class="signup-container" id="signupForm">
+                    <h2 class="signup-title">Join the Hero Team!</h2>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                         <input type="hidden" name="signup_submit" value="1">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Enter your last name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="Class">Class</label>
+                            <select id="class" required>
+                                <option value="">Select your class</option>
+                                <option value="1-4">Classes 1-4</option>
+                                <option value="5-7">Classes 5-7</option>
+                                <option value="8-10">Classes 8-10</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="school">School</label>
+                            <select id="school" required>
+                                <option value="">Select your school</option>
+                                <option value="school1">Hero Academy Primary</option>
+                                <option value="school2">Superhero High School</option>
+                                <option value="school3">Champion Elementary</option>
+                                <option value="school4">Legend Prep School</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="admissionNumber">Admission Number</label>
+                            <input type="text" id="admissionNumber" placeholder="Enter admission number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" placeholder="Create a password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        </div>
+                        <button type="submit" class="signup-btn">Sign Up</button>
+                    </form>
+                    <p class="login-link">Already a hero? <a id="showLogin">Login here</a></p>
+                </div>
+            </div>
+            {% load static %}
+            <div class="hero-image">
+                <img src="{% static '/images/hero.jpg' %}" alt="Hero Illustration">
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Toggle between login and signup forms
+        document.getElementById('showSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+        });
+        
+        document.getElementById('showLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        });
+        
+        // Form validation for signup
+        document.querySelector('.signup-container form').addEventListener('submit', function(e) {
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                alert('Passwords do not match!');
+            }
+            // Add more validation as needed
+        });
+    </script>
+</body>
+</html>

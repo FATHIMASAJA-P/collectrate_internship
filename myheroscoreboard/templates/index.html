@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My Hero Scoreboard - Mobile Optimized</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f1c40f;
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 15px 0 5px 0;
+        }
+        
+        /* Navigation - Mobile First */
+        nav ul {
+            display: flex;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s;
+            padding: 8px 0;
+            position: relative;
+            display: inline-block;
+            min-width: 60px; /* Ensures tap target size */
+        }
+        
+        nav ul li a:hover {
+            color: #2b6cb0;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: white;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section - Mobile First */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            width: 100%;
+            padding: 0 10px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 15px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: white;
+            margin-bottom: 25px;
+            max-width: 100%;
+            font-weight: 500;
+            padding: 0 10px;
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.2));
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Forms - Mobile Optimized */
+        .login-container, .signup-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            color: #333;
+        }
+        
+        .login-title, .signup-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 18px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            font-size: 16px; /* Prevents iOS zoom */
+            background: white;
+        }
+        
+        .form-group input:focus, 
+        .form-group select:focus {
+            border-color: #f1c40f;
+            outline: none;
+        }
+        
+        .login-btn, .signup-btn {
+            background-color: #f1c40f;
+            color: #333;
+            border: none;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+            cursor: pointer;
+            min-height: 48px; /* Minimum tap target size */
+        }
+        
+        .signup-text, .login-link {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .signup-text a, .login-link a {
+            color: #f1c40f;
+            font-weight: 500;
+        }
+        
+        /* Desktop Styles */
+        @media (min-width: 768px) {
+            .hero-section {
+                flex-direction: row;
+                text-align: left;
+                min-height: 70vh;
+                padding: 40px 0;
+            }
+            
+            .hero-content {
+                flex: 1;
+                padding-right: 40px;
+                margin-bottom: 0;
+                text-align: left;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+                margin-top: 0;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.5rem;
+                text-align: left;
+                padding: 0;
+            }
+            
+            .hero-image {
+                flex: 1;
+                max-width: none;
+                transform: perspective(800px) rotateY(-10deg);
+                margin-right: -30px;
+            }
+            
+            nav ul {
+                flex-wrap: nowrap;
+                gap: 20px;
+            }
+            
+            nav ul li a {
+                font-size: 18px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+            
+            .hero-image img {
+                max-height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">My Hero Scoreboard</h1>
+                <p class="hero-subtitle">Become a hero! Earn points for good habits!</p>
+                
+                <!-- Login Form -->
+                <div class="login-container" id="loginForm">
+                    <h2 class="login-title">Welcome Heroes!</h2>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" placeholder="Enter your username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                        </div>
+                        <button type="submit" class="login-btn">Login</button>
+                    </form>
+                    <p class="signup-text">New hero? <a id="showSignup">Sign up here</a></p>
+                </div>
+                
+                <!-- Signup Form -->
+                <div class="signup-container" id="signupForm" style="display:none;">
+                    <h2 class="signup-title">Join the Hero Team!</h2>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" placeholder="First name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" placeholder="Last name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="class">Class</label>
+                            <select id="class" required>
+                                <option value="">Select class</option>
+                                <option value="1-4">Classes 1-4</option>
+                                <option value="5-7">Classes 5-7</option>
+                                <option value="8-10">Classes 8-10</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="school">School</label>
+                            <select id="school" required>
+                                <option value="">Select school</option>
+                                <option value="school1">Hero Academy</option>
+                                <option value="school2">Superhero High</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="admissionNumber">Admission Number</label>
+                            <input type="text" id="admissionNumber" placeholder="Admission number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="Your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <input type="password" id="signupPassword" placeholder="Create password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+                        </div>
+                        <button type="submit" class="signup-btn">Sign Up</button>
+                    </form>
+                    <p class="login-link">Already a hero? <a id="showLogin">Login here</a></p>
+                </div>
+            </div>
+            {% load static %}
+            <div class="hero-image">
+                <img src="{% static '/images/hero.jpg' %}" alt="Happy student with scoreboard">
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Toggle between forms
+        document.getElementById('showSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('signupForm').style.display = 'block';
+        });
+        
+        document.getElementById('showLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        });
+        
+        // Password validation
+        document.querySelector('.signup-container form').addEventListener('submit', function(e) {
+            if (document.getElementById('signupPassword').value !== 
+                document.getElementById('confirmPassword').value) {
+                e.preventDefault();
+                alert('Passwords must match!');
+            }
+        });
+    </script>
+</body>
+</html>
